@@ -1,0 +1,35 @@
+Python Code:
+pip install networkx
+pip install matplotlib
+import networkx as nx
+import matplotlib.pyplot as plt
+%matplotlib notebook
+graph_Mark = nx.DiGraph(Info = "Mark's Details")
+graph_Mark.add_node("Mark",pos=(0,0))
+graph_Mark.add_node("Cat",pos=(-2,6))
+graph_Mark.add_node("student",pos=(2,-5))
+graph_Mark.add_node("animal",pos=(1,6))
+graph_Mark.add_node("California",pos=(4,6))
+graph_Mark.add_node("Spinoff",pos=(-5,-5))
+graph_Mark.add_node("Soccer",pos=(-5,2))
+graph_Mark.add_node("Sports Club",pos=(0,-8))
+graph_Mark.add_node("CSU",pos=(5,-1))
+pos=nx.get_node_attributes(graph_Mark,"pos")
+graph_Mark.add_edge("Mark","Cat",weight="has a")
+graph_Mark.add_edge("Mark","student",weight="is a")
+graph_Mark.add_edge("Cat","animal",weight="is a")
+graph_Mark.add_edge("Mark","Soccer",weight="plays")
+graph_Mark.add_edge("Mark","Spinoff",weight="is a part of")
+graph_Mark.add_edge("Mark","California",weight="lives in")
+graph_Mark.add_edge("Mark","animal",weight="loves")
+graph_Mark.add_edge("student","CSU",weight="in")
+graph_Mark.add_edge("Spinoff","Sports Club",weight="is a")
+graph_Mark.add_edge("CSU","California",weight="is in")
+
+weight=nx.get_edge_attributes(graph_Mark,"weight")
+
+plt.figure()
+
+nx.draw_networkx(graph_Mark,pos,font_weight = bold',node_size=2000,font_size=7)
+
+nx.draw_networkx_edge_labels(graph_Mark,pos,edge_labels=weight)

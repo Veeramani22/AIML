@@ -1,0 +1,272 @@
+pip install expert
+
+from experta import *
+
+class meds(KnowledgeEngine):
+
+ @DefFacts()
+
+ def _initial_action(self):
+
+ yield Fact(action ='load')
+
+ 
+
+ # Starting Questions
+
+ @Rule(Fact(action = 'load'), NOT(Fact(fulltime = W())))
+
+ def start_quest(self):
+
+ print("Welcome to the Medical Expert System. ")
+
+ self.declare(Fact(intro = input("Please enter your name: ")))
+
+ self.declare(Fact(fulltime = input("Do you want to enter the Medical Expert System? ")))
+
+ 
+
+ # Not interested in entering
+
+ @Rule(Fact(action = 'load'), (Fact(fulltime = 'no')))
+
+ def exiting(self):
+
+ print("Thank you!")
+
+ 
+
+ # Rule 1: Checking Covid Symptom #1 - Fever
+
+ @Rule(Fact(action = 'load'), (Fact(fulltime = 'yes')))
+
+ def fever_check(self):
+
+ self.declare(Fact(Fever = input("Do you have fever for the last few days? ")))
+
+ # Rule 2: Checking Covid Symptom #2 - Dry Cough
+
+ @Rule(Fact(action = 'load'), AND(Fact(fulltime = 'yes'), NOT(Fact(Fever = 'not sure'))))
+
+ def cough_check(self):
+
+self.declare(Fact(Cough = input("Do you have dry cough for the last few days? ")))
+
+ 
+
+ # Rule 3: Checking Covid Symptom #3 - Tiredness 
+
+ @Rule(Fact(action='load'), AND(Fact(fulltime = 'yes'), NOT(Fact(Fever = 'not sure')), NOT(Fact(Cough = 'not 
+
+sure'))))
+
+ def tired_check(self):
+
+ self.declare(Fact(Tired = input("Have you been feeling tired? ")))
+
+ 
+
+ # Diagnosis uptil Rule 3
+
+ @Rule(Fact(action='load'), AND(Fact(fulltime='yes'), AND(Fact(Fever = 'yes'), Fact(Cough = 'no'), Fact(Tired 
+
+= 'no'))))
+
+ def accept_1(self):
+
+ print("You have fever, please take rest and have Paracetamol")
+
+ 
+
+ @Rule(Fact(action='load'), AND(Fact(fulltime='yes'), AND(Fact(Fever = 'no'), Fact(Cough = 'yes'), Fact(Tired 
+
+= 'no'))))
+
+ def accept_2(self):
+
+ print("You just have dry cough. Please gargle, steam and have lots of hot water.")
+
+ 
+
+ @Rule(Fact(action='load'), AND(Fact(fulltime='yes'), Fact(Fever = 'yes'), Fact(Cough = 'yes'), Fact(Tired = 
+
+'yes')))
+
+ def accept_3(self):
+
+ print("You are showing symptoms of COVID-19. Please get yourself tested and stay quarentined.")
+
+ 
+
+ @Rule(Fact(action='load'), AND(Fact(fulltime='yes'), Fact(Fever = 'no'), Fact(Cough = 'yes'), Fact(Tired = 
+
+'yes')))
+
+ def accept_4(self):
+
+ print("Please visit the doctor as you may have a throat infection.")
+
+ @Rule(Fact(action='load'), AND(Fact(fulltime='yes'), Fact(Fever = 'yes'), Fact(Cough = 'no'), Fact(Tired = 
+
+'yes')))
+
+ def accept_5(self):
+
+ print("You may be having a viral infection. Take ample rest. If it presists please visit a doctor.")
+
+ 
+
+ # Enter advance expert system.
+
+ @Rule(Fact(action = 'load'), AND(Fact(fulltime = 'yes'), OR(Fact(Fever = 'yes'), Fact(Fever = 'no')), 
+
+ OR(Fact(Cough = 'yes'), Fact(Cough = 'no')), 
+
+ OR(Fact(Tired = 'yes'), Fact(Tired = 'no'))))
+
+ def adv_expt(self):
+
+ print("You have completed the simple medical expert system.")
+
+ self.declare(Fact(dep_dive = input("Do you want to dive deeper into the expert system? ")))
+# Deciding.
+
+ @Rule(Fact(action = 'load'), AND(Fact(fulltime = 'yes'), Fact(dep_dive = 'no')))
+
+ def div_reject(self):
+
+ print("Thank you for using our expert system.")
+
+ 
+
+ # Rule 4: Checking Covid Symptom #4 - Shortness of breath
+
+ @Rule(Fact(action = 'load'), AND(Fact(fulltime = 'yes'), Fact(dep_dive = 'yes')))
+
+ def breath(self):
+
+ self.declare(Fact(breathing = input("Have you been experiencing shortness of breath? ")))
+
+ 
+
+ # Rule 5: Checking Covid Symptom #5 - Chest Pain
+
+ @Rule(Fact(action = 'load'), AND(Fact(fulltime = 'yes'), Fact(dep_dive = 'yes'), 
+
+ OR(Fact(breathing = 'yes'), Fact(breathing = 'no'))))
+
+ def chest_pain(self):
+
+ self.declare(Fact(chest = input("Have you been experiencing acute chest pain or pressure? ")))
+
+ 
+
+ # Rule 6: Checking Covid Symptom #6 - Loss of speech or movement
+
+ @Rule(Fact(action = 'load'), AND(Fact(fulltime = 'yes'), Fact(dep_dive = 'yes'), 
+
+ OR(Fact(breathing = 'yes'), Fact(breathing = 'no')), 
+
+ OR(Fact(chest = 'yes'), Fact(chest = 'no'))))
+
+ def speech_loss(self):
+
+ self.declare(Fact(loss = input("Have you been experiencing any loss of speech or movement? ")))
+
+ 
+
+ #Diagnosis 4-6
+
+ @Rule(Fact(action='load'), AND(Fact(fulltime='yes'), Fact(dep_dive = 'yes'), Fact(breathing = 'yes'), Fact(loss 
+
+= 'no'), Fact(chest = 'no')))
+
+ def accept_6(self):
+
+ print("You seem to be having shortness of breath. Even if you are not COVID positve, this is serious.")
+
+ print("Go to the doctor immediately.")
+
+ @Rule(Fact(action='load'), AND(Fact(fulltime='yes'), Fact(dep_dive = 'yes'), Fact(breathing = 'no'), Fact(loss 
+
+= 'yes'), Fact(chest = 'no')))
+
+ def accept_7(self):
+
+ print("You seem to be having either loss of speech or movement. Even if you are not COVID positve, this is 
+
+serious.")
+
+ print("Go to the doctor immediately.")
+
+ 
+
+ @Rule(Fact(action='load'), AND(Fact(fulltime='yes'), Fact(dep_dive = 'yes'), Fact(breathing = 'no'), Fact(loss 
+
+= 'no'), Fact(chest = 'yes')))
+
+ def accept_8(self):
+
+ print("You seem to be having chest pain. Even if you are not COVID positve, this is serious.")
+
+ print("Go to the doctor immediately.")
+@Rule(Fact(action='load'), AND(Fact(fulltime='yes'), Fact(dep_dive = 'yes'), Fact(breathing = 'yes'), Fact(loss 
+
+= 'no'), Fact(chest = 'yes')))
+
+ def accept_9(self):
+
+ print("You seem to be having chest pain and shortness of breath. Even if you are not COVID positve, this is 
+
+serious.")
+
+ print("Go to the doctor immediately.")
+
+ 
+
+ @Rule(Fact(action='load'), AND(Fact(fulltime='yes'), Fact(dep_dive = 'yes'), Fact(breathing = 'no'), Fact(loss 
+
+= 'yes'), Fact(chest = 'yes')))
+
+ def accept_10(self):
+
+ print("You seem to be having chest pain and loss of speech or motion. Even if you are not COVID positve, 
+
+this is serious.")
+
+ print("Go to the doctor immediately.")
+
+ 
+
+ @Rule(Fact(action='load'), AND(Fact(fulltime='yes'), Fact(dep_dive = 'yes'), Fact(breathing = 'yes'), Fact(loss 
+
+= 'yes'), Fact(chest = 'no')))
+
+ def accept_11(self):
+
+ print("You seem to be having shortness of breath and loss of speech or movement. Even if you are not 
+
+COVID positve, this is serious.")
+
+ print("Go to the doctor immediately.")
+
+ 
+
+ @Rule(Fact(action='load'), AND(Fact(fulltime='yes'), Fact(dep_dive = 'yes'), Fact(breathing = 'yes'), Fact(loss 
+
+= 'yes'), Fact(chest = 'yes')))
+
+ def accept_12(self):
+
+ print("You seem to be having chest pain, shortness of breathing and loss of speech or movement Even if you 
+
+are not COVID positve, this is serious.")
+
+ print("Go to the doctor immediately.")
+
+Engine = meds()
+
+Engine.reset()
+
+Engine.run()
+

@@ -1,0 +1,28 @@
+Importing libraries
+import warnings
+warnings.simplefilter('ignore')
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+%matplotlib inline
+import seaborn as sns
+Reading data set
+Student_Certification=pd.read_excel ("student_dataset.xlsx")
+Cleaning data
+Student_Certification=Student_Certification.drop(["S.NO"],axis=1)
+Student_Certification=Student_Certification.drop(["TOTAL"],axis=1)
+y=Student_Certification["CERTIFICATE"]
+X=Student_Certification.drop(["CERTIFICATE"],axis=1)
+Splitting data
+from sklearn.model_selection import train_test_split
+X_train,X_test,y_train,y_test=train_test_split(X,y,test_size=0.3,random_state=123)
+Prediction modeling
+from sklearn.tree import DecisionTreeClassifier
+DC=DecisionTreeClassifier(criterion="entropy")
+DC.fit(X_train,y_train)
+y_pred=DC.predict(X_test
+Checking the model accuracy
+
+from sklearn.metrics import accuracy_score
+
+acc=accuracy_score(y_test,y_pred)

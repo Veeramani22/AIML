@@ -1,11 +1,14 @@
-#count in python
-tuple1=(10,20,30,40,50,60)
-print(tuple1)
-#count()
-thistuple=(1,3,7,8,7,5,4,6,8,5)
-x=thistuple.count(5)
-print(x)
-#index
-thistuple=(1,3,7,8,7,5,4,6,8,5)
-x=thistuple.index(8)
-print(x)
+# Python program - To count total digits in a number using while loop
+print(end="Enter the Number: ")
+num = int(input())
+tot = 0
+
+while num:
+	num = int(num/10)
+	tot = tot+1
+	
+if tot>1:
+	print("\nThere are " +str(tot)+ " digits available in the number")
+elif tot==1:
+	print("\nIt is a single digit number")
+	

@@ -1,7 +1,9 @@
-#for loop in python
-for i in range(0,21,2):
-	print(i)
-for i in range(4):
-	a=int(input("Enter a No:"))
-	b=int(input("Enter a No:"))
-	print(a+b)
+#loop through the lines in python
+try:
+	file=open("new\\word.py","r")
+	for line in file:
+		print(line)
+except  FileNotFoundError:
+	print("Error:File Not Found")
+else:
+	file.close()

@@ -1,73 +1,34 @@
 #list in python
-a=[1,2,3,4,5]
-print(a)
-print(type(a))
-a[0]=100
-print(a)
-print("slicing")
-print(a[1])
-print(a[-1])
-print(a[0:3])
-print(a[2:])
-print(a[:3])
-print("------------------------------")
-a=[1,True,'ram',2.5,[1,2,3,4]]
-print(a)
-print(a[0],"type is",type(a[0]))
-print(a[1],"type is",type(a[1]))
-print(a[2],"type is",type(a[2]))
-print(a[3],"type is",type(a[3]))
-print(a[4],"type is",type(a[4]))
-print(a[4][1])#meaning 4th index 1st element
-print("-----------------------------")
-a=[10,25,35,45]
-print(a)
-a.clear()
-print(a)
-a=[10,25,35,45]
-b=a.copy()
-print(b)
-a=[10,25,35,45,25,4,25]
-print(a.count(25))
-print(a.index(25)) #25 what position 
-print(len(a))
-print(max(a))
-print(min(a))
-print(a)
-a.pop(0) #remove element using index
-print(a)
-a=[10,25,35,45,25,4,25]
-a.remove(25) # remove paricular first values only
-print(a)
-print("-------------------------------------")
-names=["Black"]
-print(names)
-names.append("madhu")
-names.append("ram")
-names.append("priya")
-print(names)
-name2=["dhina","anu"]
-names.extend(name2)
-print(names)
-names.insert(0,"suriya")
-print(names)
-print("--------------------------------------")
-print(list(range(5)))
-print(list("madhumitha"))
-a=[10,50,100,25,85]
-print(a)
-a.sort()
-print(a)
-a.sort(reverse=True)
-print(a)
-a=["orange","apple","zebra"]
-a.sort()
-print(a)
-a.sort(reverse=True)
-print(a)
-a=["orange","apple","zebra"]
-a.sort(key=len)
-print(a)
-    
-
-
+print("-----list must have square bracate----------")
+thislist=["apple","banana","cherry"]
+print("-------print list[i]-----")
+print(thislist[1])
+print("-------------print full list-------")
+print(thislist)
+this=["apple","banana","cherry"]
+this[1]="blackcurrant"
+print("-----------change banana to blackcurrant in list[i]---------")
+print(this)
+print("---------check the list using if--------")
+thislist=["apple","banana","cherry"]
+if ("mango" in thislist):
+	print("yes,'mango' is in the fruits list")
+else:
+	print("no")
+print("---------to find the len of-----")
+print(len(thislist))
+print("-------------add value to list----")
+thislist=["apple","banana","cherry"]
+print("---------add value to list before----")
+print(thislist)
+print("---------add value to list after----")
+print(thislist)
+print("------------insert(move)---------")
+thislist.insert(1,"orange")
+thislist.insert(5,"banana")
+print(thislist)
+thislist.reverse()
+print(thislist)
+print("-----pop the val---")
+thislist.pop()
+print(thislist)

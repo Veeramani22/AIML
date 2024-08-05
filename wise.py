@@ -1,9 +1,10 @@
-#bitwise operators
-a=25
-b=45
-print(a&b) #binary value change
+#bitwise operator
+a=16
+b=10
+print(a&b)
 print(a|b)
 print(a^b)
-print(~a)
-print(a<<2)
-print(a>>2)
+x=8
+z=10
+print(x<<2) #left shift op
+print(x>>2) #right shift op

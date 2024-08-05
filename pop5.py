@@ -1,0 +1,9 @@
+# Python list pop last n elements
+# list of number
+myList = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+
+# popping multiple elements
+popped_element = [myList.pop() for i in range(5)]
+
+# printing original list
+print(myList)

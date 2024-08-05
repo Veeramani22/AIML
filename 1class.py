@@ -1,17 +1,18 @@
-#class method decorator is python
-class student
-	cout=0
-	def_init_(self,name,age):
+
+#class method decorator in python
+class student:
+	count=0
+	def __init__(self,name,age):
 		self.name=name
 		self.age=age
-		student.cout+=1
+		student.count+=1
 	def printDetail(self):
 		print("Name:",self.name,"age:",self.age)
 	@classmethod
 	def total(cls):
 		return cls.count
-0=student("Ram",25)
-0.printDetail()
+o=student("Ram",25)
+o.printDetail()
 print("Total Admission:",o.total())
 a=student("Raja",29)
 a.printDetail()

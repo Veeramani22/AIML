@@ -1,6 +1,10 @@
-#add in python
-a=float(input("enter the value of A:"))
-b=float(input("enter the value of B:"))
-c=a+b
-print(c)
+#add
+a=25
+b=50
+c=a+b 
+print("total:",c)
 print(type(a))
+a=45
+print(id(a))
+print(id(b))
+print(id(c))

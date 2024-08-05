@@ -1,5 +1,8 @@
-#multiple inputs in single line python
-name1,name2,name3=input("enter 3 names:").split(',')
-print("Name 1:",name1)
-print("Name 2:",name2)
-print("Name 3:",name3)
+#string in python
+print("----------check string------")
+txt="the train in spain stays mainly in the plain"
+x="ain" in txt
+print(x)
+txt="the train in spain stays mainly in the pain"
+x="san" not in txt
+print(x)
